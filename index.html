@@ -44,7 +44,8 @@
                 <div class="game-header">
                     <!-- Обновляем заголовок режима обороны в соответствии с новым названием -->
                     <h2 class="mode-title">ПОЛИГОН ИСПЫТАНИЙ</h2>
-                    <div class="stats">
+
+                    <div class="stats" aria-label="Статистика полигона">
                         <div class="stat-item">
                             <span class="stat-label">Здоровье:</span>
                             <span class="stat-value" id="health">100</span>
@@ -57,21 +58,51 @@
                             <span class="stat-label">Волна:</span>
                             <span class="stat-value" id="wave">1</span>
                         </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Осталось:</span>
+                            <span class="stat-value" id="enemiesLeft">0</span>
+                        </div>
+                    </div>
+
+                    <div class="defense-controls" aria-label="Управление полигоном">
+                        <button class="defense-btn" type="button" id="pauseBtn" aria-pressed="false" title="Пауза (P)">⏸</button>
+                        <button class="defense-btn" type="button" id="speedBtn" aria-pressed="false" title="Скорость (X)">⏩ x1</button>
                     </div>
                 </div>
 
                 <!-- Удаляем атрибуты width/height, чтобы размеры задавались исключительно через CSS для адаптивности -->
                 <canvas id="gameCanvas" class="game-canvas"></canvas>
 
-                <div class="tower-panel" id="towerPanel"></div>
+                <div class="tower-actions hidden" id="towerActions" aria-hidden="true"></div>
 
-                <div id="historicalFact" class="historical-fact hidden">
+                <!-- Mobile bottom sheet: Towers / Fact tabs (no overlapping panels on phones) -->
+                <div class="defense-sheet" id="defenseSheet" aria-label="Панель управления полигоном">
+                    <div class="defense-sheet-tabs" role="tablist" aria-label="Панель: Башни и Факт">
+                        <button class="defense-sheet-tab is-active" type="button" id="sheetTabTowers" role="tab"
+                            aria-selected="true" aria-controls="sheetPanelTowers">Башни</button>
+                        <button class="defense-sheet-tab" type="button" id="sheetTabFact" role="tab"
+                            aria-selected="false" aria-controls="sheetPanelFact">Факт</button>
+                    </div>
+
+                    <div class="defense-sheet-body">
+                        <div class="defense-sheet-panel is-active" id="sheetPanelTowers" role="tabpanel" aria-labelledby="sheetTabTowers">
+                            <div class="tower-panel" id="towerPanel"></div>
+                        </div>
+
+                        <div class="defense-sheet-panel" id="sheetPanelFact" role="tabpanel" aria-labelledby="sheetTabFact">
+                            <div id="historicalFact" class="historical-fact hidden">
                     <div class="fact-title" id="factTitle"></div>
                     <div class="fact-content">
                         <div class="fact-text fact-collapsed" id="factContent"></div>
                         <button class="fact-toggle" id="factToggle" type="button" aria-expanded="false">Читать далее</button>
                     </div>
                     <button class="menu-btn next-wave-btn" type="button" onclick="nextWave()">СЛЕДУЮЩАЯ ВОЛНА</button>
+                            </div>
+                            <div class="fact-placeholder" id="factPlaceholder" aria-live="polite">
+                                📌 Исторический факт появится после завершения волны.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

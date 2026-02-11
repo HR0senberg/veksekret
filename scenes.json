@@ -91,8 +91,8 @@
       }
     ],
     "buttonText": "Что же дальше?",
-    "photo": "img/kisunko_teacher.jpg",
-    "photoCaption": "Фото: Аспирант в Ленинграде",
+    "photo": "img/herzen_university.jpg",
+    "photoCaption": "РГПУ им. А. И. Герцена (Ленинград), где Кисунько учился в аспирантуре",
     "next": 5
   },
   {
@@ -143,8 +143,8 @@
       }
     ],
     "buttonText": "И стал офицером?",
-    "photo": "img/kisunko_soldier.jpg",
-    "photoCaption": "Фото: Курсант ВНОС, 1942",
+    "photo": "img/rus1_radar.jpg",
+    "photoCaption": "РЛС РУС‑1 «Ревень» — пример техники ВНОС и ранней радиолокации",
     "next": 7
   },
   {
@@ -173,8 +173,8 @@
       }
     ],
     "buttonText": "Что было дальше?",
-    "photo": "img/kisunko_soldier.jpg",
-    "photoCaption": "Фото: Командир взвода, 1943",
+    "photo": "img/leningrad_aa.jpg",
+    "photoCaption": "«Зенитчики на страже Ленинградского неба», 1941",
     "next": 8
   },
   {
@@ -203,8 +203,8 @@
       }
     ],
     "buttonText": "Идём дальше",
-    "photo": "img/kisunko_teacher.jpg",
-    "photoCaption": "Фото: Преподаватель академии, 1945",
+    "photo": "img/budyonny_academy.jpg",
+    "photoCaption": "Военная академия связи им. С. М. Будённого (Санкт‑Петербург)",
     "next": 9
   },
   {
@@ -229,8 +229,8 @@
       }
     ],
     "buttonText": "Какие ракеты?",
-    "photo": "img/kisunko_teacher.jpg",
-    "photoCaption": "Фото: КБ‑1, 1953",
+    "photo": "img/almaz_hq.jpg",
+    "photoCaption": "Штаб‑квартира НПО «Алмаз» / «Алмаз‑Антей» (Москва)",
     "next": 10
   },
   {
@@ -259,7 +259,7 @@
       }
     ],
     "photo": "img/rocket.jpg",
-    "photoCaption": "Фото: РЛС систем С‑25/С‑75",
+    "photoCaption": "Зенитная ракета (иллюстрация темы ПВО)",
     "choices": [
       {
         "text": "Узнать о награждении",
@@ -293,8 +293,8 @@
       }
     ],
     "buttonText": "Что дальше?",
-    "photo": "img/home_door.jpg",
-    "photoCaption": "Фото: Медаль Героя Соцтруда",
+    "photo": "img/hero_medal.png",
+    "photoCaption": "Медаль «Серп и Молот» — Герой Социалистического Труда",
     "next": 12
   },
   {
@@ -375,8 +375,8 @@
       }
     ],
     "buttonText": "Вернуться в меню",
-    "photo": "img/home_door.jpg",
-    "photoCaption": "Фото: Памятник Г.В. Кисунько",
+    "photo": "img/don2n_radar.jpg",
+    "photoCaption": "Радар Дон‑2Н — ключевой элемент современной системы ПРО Москвы",
     "next": null
   }
 ]

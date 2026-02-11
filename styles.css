@@ -165,6 +165,15 @@ input:focus-visible,
   animation: toastPop 2000ms ease forwards;
 }
 
+
+.toast.toast--success{
+  background: rgba(var(--color-teal-500-rgb), 0.92);
+}
+
+.toast.toast--info{
+  background: rgba(170, 140, 100, 0.92);
+}
+
 @keyframes toastPop{
   0%{ opacity: 0; transform: translateX(-50%) translateY(-8px) scale(0.98); }
   12%{ opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
@@ -1019,6 +1028,53 @@ kbd{
   gap: var(--space-24);
 }
 
+/* Defense controls (pause / speed) */
+.defense-controls{
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.defense-btn{
+  width: 68px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 176, 122, 0.35);
+  background: rgba(10, 10, 26, 0.55);
+  color: rgba(255,255,255,0.94);
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.defense-btn:hover{
+  border-color: rgba(201, 176, 122, 0.65);
+  transform: translateY(-1px);
+}
+
+.defense-btn:active{
+  transform: translateY(1px) scale(0.98);
+}
+
+.defense-btn[aria-pressed="true"]{
+  background: rgba(var(--color-teal-500-rgb), 0.18);
+  border-color: rgba(var(--color-teal-500-rgb), 0.55);
+}
+
+/* Responsive header */
+@media (max-width: 720px){
+  .game-header{
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .stats{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 .stat-item {
   font-size: var(--font-size-lg);
 }
@@ -1047,6 +1103,133 @@ kbd{
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: var(--space-24);
+}
+
+/* Tower actions (upgrade / sell) */
+.tower-actions{
+  max-width: 980px;
+  margin: 0 auto var(--space-16);
+  padding: var(--space-16);
+  background: rgba(26, 26, 46, 0.82);
+  border: 1px solid rgba(201, 176, 122, 0.32);
+  border-radius: var(--radius-base);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+
+.tower-actions.hidden{
+  display: none;
+}
+
+.tower-actions-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tower-actions-title{
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: var(--color-primary);
+  font-size: 1.05rem;
+}
+
+.tower-actions-sub{
+  margin-top: 4px;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.tower-actions-close{
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
+  color: rgba(255,255,255,0.9);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.tower-actions-close:hover{
+  border-color: rgba(201, 176, 122, 0.55);
+}
+
+.tower-actions-grid{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tower-actions-chip{
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.18);
+  text-align: center;
+}
+
+.tower-actions-chip .label{
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.tower-actions-chip .value{
+  display: block;
+  font-weight: 900;
+  color: rgba(255,255,255,0.95);
+  margin-top: 2px;
+}
+
+.tower-actions-buttons{
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tower-actions-btn{
+  min-width: 170px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(201, 176, 122, 0.32);
+  background: rgba(10, 10, 26, 0.60);
+  color: rgba(255,255,255,0.94);
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.tower-actions-btn:hover{
+  border-color: rgba(201, 176, 122, 0.65);
+  transform: translateY(-1px);
+}
+
+.tower-actions-btn:active{
+  transform: translateY(1px) scale(0.99);
+}
+
+.tower-actions-btn[disabled]{
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.tower-actions-btn--danger{
+  border-color: rgba(var(--color-red-500-rgb), 0.55);
+  background: rgba(var(--color-red-500-rgb), 0.18);
+}
+
+.tower-actions-btn--danger:hover{
+  border-color: rgba(var(--color-red-500-rgb), 0.85);
+}
+
+@media (max-width: 720px){
+  .tower-actions-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .tower-actions-btn{ min-width: 150px; }
 }
 
 .tower-card {
@@ -2914,9 +3097,10 @@ kbd{
         }
 
 
-/* === Defense fact overlay (from app.js) === */
+/* === Defense fact overlay (desktop only) === */
 
-#defenseMode #historicalFact{
+@media (min-width: 901px){
+  #defenseMode #historicalFact{
     position: fixed !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
@@ -2954,9 +3138,167 @@ kbd{
     background: rgba(201,176,122,0.14) !important;
     border-color: rgba(201,176,122,0.55) !important;
   }
-  @media (max-width:600px){
-    #defenseMode #historicalFact{max-height:min(32vh,360px) !important; padding:10px !important}
+}
+
+/* =========================================================
+   Defense mobile bottom sheet (tabs: Башни / Факт)
+   ========================================================= */
+
+.defense-sheet{
+  width: 100%;
+}
+
+.defense-sheet-tabs{
+  display: none;
+}
+
+.fact-placeholder{
+  display: none;
+  padding: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0.80);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(12,14,24,0.22);
+  border: 1px dashed rgba(201,176,122,0.32);
+  border-radius: 14px;
+}
+
+#sheetPanelFact #historicalFact.hidden + .fact-placeholder{
+  display: block;
+}
+
+@media (max-width: 900px){
+  /* отключаем fixed-оверлей — факт живёт внутри нижней панели */
+  #defenseMode #historicalFact{
+    position: static !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    z-index: auto !important;
   }
+
+  .defense-sheet{
+    margin-top: 10px;
+    background: rgba(12,14,24,0.22);
+    border: 1px solid rgba(201,176,122,0.20);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 46px rgba(0,0,0,0.28);
+    backdrop-filter: blur(14px) saturate(135%);
+    -webkit-backdrop-filter: blur(14px) saturate(135%);
+  }
+
+  .defense-sheet-tabs{
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(0,0,0,0.16);
+    border-bottom: 1px solid rgba(201,176,122,0.18);
+  }
+
+  .defense-sheet-tab{
+    flex: 1;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(201,176,122,0.25);
+    background: rgba(10,10,26,0.40);
+    color: rgba(255,255,255,0.92);
+    font-weight: 900;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+  }
+
+  .defense-sheet-tab:active{
+    transform: translateY(1px) scale(0.99);
+  }
+
+  .defense-sheet-tab.is-active{
+    background: rgba(201,176,122,0.22);
+    border-color: rgba(201,176,122,0.58);
+    color: rgba(255,255,255,0.98);
+  }
+
+  .defense-sheet-tab.has-new{
+    box-shadow: 0 0 0 2px rgba(var(--color-teal-500-rgb), 0.18) inset,
+                0 0 18px rgba(var(--color-teal-500-rgb), 0.18);
+  }
+
+  .defense-sheet-body{
+    padding: 10px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    min-height: 190px;
+    max-height: 42vh;
+    overflow: hidden;
+  }
+
+  .defense-sheet-panel{
+    display: none;
+    height: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+  }
+
+  .defense-sheet-panel::-webkit-scrollbar{ width: 0; height: 0; }
+
+  .defense-sheet-panel.is-active{
+    display: block;
+  }
+
+  /* Внутри панели не нужны внешние отступы */
+  #defenseMode .tower-panel{
+    margin: 0 !important;
+  }
+  #defenseMode .historical-fact{
+    margin: 0 !important;
+  }
+}
+
+/* Телефонный "киоск": шапка + поле + нижняя панель, без наложений */
+@media (max-width: 700px){
+  #defenseMode{
+    height: calc(var(--vh, 1vh) * 100);
+    overflow: hidden;
+    width: 100% !important;
+    padding: 12px !important;
+    margin: 0 auto !important;
+  }
+
+  #defenseMode .defense-container{
+    display: flex !important;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    padding: 0 !important;
+    margin-top: 0 !important;
+    gap: 12px !important;
+  }
+
+  #defenseMode .game-header{
+    margin-bottom: 0 !important;
+  }
+
+  #defenseMode #gameCanvas,
+  #defenseMode .game-canvas{
+    flex: 1 1 auto;
+    min-height: 170px;
+    height: 100% !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    margin: 0 !important;
+  }
+
+  #defenseMode .defense-sheet-body{
+    max-height: 46vh;
+    min-height: 220px;
+  }
+}
 
 
 @media (prefers-reduced-motion: reduce){
