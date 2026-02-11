@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект 1430 - Г.В. Кисунько</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="project-logo">
+            <div class="radar-icon"></div>
+        </div>
+        <div class="title-typewriter" id="titleTypewriter"></div>
+        <div class="subtitle-loading">
+            <span class="loading-dots">Инициализация исторического архива</span>
+        </div>
+        <div class="menu-buttons" id="menuButtons">
+            <div class="menu-group" id="questMenuGroup">
+                <button class="menu-btn" type="button" id="questMainBtn" onclick="continueQuest()">ТЕКСТОВЫЙ КВЕСТ</button>
+                <div class="menu-note hidden" id="questProgressNote" aria-live="polite"></div>
+                <button class="menu-btn menu-btn-secondary hidden" type="button" id="questRestartBtn" onclick="restartQuest()">НАЧАТЬ ЗАНОВО</button>
+            </div>
+            <!-- Переименовываем режим Tower Defense в "Полигон Испытаний" -->
+            <button class="menu-btn" type="button" onclick="startDefense()">ПОЛИГОН ИСПЫТАНИЙ</button>
+            <button class="menu-btn" type="button" onclick="startGallery()">ГАЛЕРЕЯ</button>
+        </div>
+        <div class="menu-footer" id="menuFooter">Авторы: Марыкин Тимофей и Максим Трушин • Проект 1430</div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app">
+        <button class="back-btn" type="button" onclick="returnToMenu()">← МЕНЮ</button>
+        
+        <!-- Quest Mode -->
+        <div id="questMode" class="hidden">
+            <div class="quest-container" id="questContainer"></div>
+        </div>
+
+        <!-- Tower Defense Mode -->
+        <div id="defenseMode" class="hidden">
+            <div class="defense-container">
+                <div class="game-header">
+                    <!-- Обновляем заголовок режима обороны в соответствии с новым названием -->
+                    <h2 class="mode-title">ПОЛИГОН ИСПЫТАНИЙ</h2>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Здоровье:</span>
+                            <span class="stat-value" id="health">100</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ресурсы:</span>
+                            <span class="stat-value" id="resources">1000</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Волна:</span>
+                            <span class="stat-value" id="wave">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Удаляем атрибуты width/height, чтобы размеры задавались исключительно через CSS для адаптивности -->
+                <canvas id="gameCanvas" class="game-canvas"></canvas>
+
+                <div class="tower-panel" id="towerPanel"></div>
+
+                <div id="historicalFact" class="historical-fact hidden">
+                    <div class="fact-title" id="factTitle"></div>
+                    <div class="fact-content">
+                        <div class="fact-text fact-collapsed" id="factContent"></div>
+                        <button class="fact-toggle" id="factToggle" type="button" aria-expanded="false">Читать далее</button>
+                    </div>
+                    <button class="menu-btn next-wave-btn" type="button" onclick="nextWave()">СЛЕДУЮЩАЯ ВОЛНА</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Mode -->
+        <div id="galleryMode" class="hidden">
+            <div class="gallery-container" id="galleryContainer"></div>
+        </div>
+    </div>
+
+    <!-- Sound Controls (collapsed by default; expands on click) -->
+    <div class="sound-controls" id="soundControls">
+        <button class="help-btn" id="helpBtn" type="button" aria-label="Справка и управление">❔</button>
+        <button class="sound-panel-toggle" id="soundPanelToggle" type="button" aria-label="Настройки звука">🔊</button>
+        <div class="sound-panel-body" id="soundPanelBody" aria-hidden="true">
+            <button class="sound-toggle" type="button" onclick="toggleSound()" id="soundBtn" aria-pressed="false">🔇 ЗВУК: ВЫКЛ</button>
+            <div class="volume-control">
+                <label for="volumeSlider">Громкость:</label>
+                <input id="volumeSlider" type="range" class="volume-slider" min="0" max="100" value="50" oninput="changeVolume(this.value)">
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
