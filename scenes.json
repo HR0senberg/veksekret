@@ -19,7 +19,22 @@
     "buttonText": "Да, запускай архив.",
     "photo": "img/kisunko_teacher.jpg",
     "photoCaption": "Фото: Г.В. Кисунько, портрет",
-    "next": 2
+    "next": 2,
+    "year": "АРХИВ",
+    "place": "Проект 1430",
+    "glossaryUnlock": [
+      "kisunko"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: Кисунько, Григорий Васильевич",
+        "url": "https://ru.wikipedia.org/wiki/Кисунько,_Григорий_Васильевич"
+      },
+      {
+        "title": "Г.В. Кисунько — «Секретная зона: Исповедь генерального конструктора» (мемуары)",
+        "url": ""
+      }
+    ]
   },
   {
     "id": 2,
@@ -45,7 +60,16 @@
     "buttonText": "Как он вообще смог?",
     "photo": "img/kisunko_school.jpg",
     "photoCaption": "Фото: Юный Григорий Кисунько",
-    "next": 3
+    "next": 3,
+    "year": 1918,
+    "place": "Бельманка (Запорожская обл.)",
+    "glossaryUnlock": [],
+    "sources": [
+      {
+        "title": "Википедия: Кисунько, Григорий Васильевич",
+        "url": "https://ru.wikipedia.org/wiki/Кисунько,_Григорий_Васильевич"
+      }
+    ]
   },
   {
     "id": 3,
@@ -67,7 +91,16 @@
     "buttonText": "Далее в аспирантуру?",
     "photo": "img/kisunko_student.jpg",
     "photoCaption": "Фото: Студент Луганского пединститута",
-    "next": 4
+    "next": 4,
+    "year": 1938,
+    "place": "Луганск",
+    "glossaryUnlock": [],
+    "sources": [
+      {
+        "title": "Википедия: Кисунько, Григорий Васильевич",
+        "url": "https://ru.wikipedia.org/wiki/Кисунько,_Григорий_Васильевич"
+      }
+    ]
   },
   {
     "id": 4,
@@ -93,7 +126,20 @@
     "buttonText": "Что же дальше?",
     "photo": "img/herzen_university.jpg",
     "photoCaption": "РГПУ им. А. И. Герцена (Ленинград), где Кисунько учился в аспирантуре",
-    "next": 5
+    "next": 5,
+    "year": 1941,
+    "place": "Ленинград",
+    "glossaryUnlock": [],
+    "sources": [
+      {
+        "title": "РГПУ им. А. И. Герцена (справка)",
+        "url": "https://herzen.spb.ru/"
+      },
+      {
+        "title": "Википедия: Кисунько, Григорий Васильевич",
+        "url": "https://ru.wikipedia.org/wiki/Кисунько,_Григорий_Васильевич"
+      }
+    ]
   },
   {
     "id": 5,
@@ -119,7 +165,20 @@
     "buttonText": "Куда его направят?",
     "photo": "img/kisunko_soldier.jpg",
     "photoCaption": "Фото: Рядовой ополчения, 1941",
-    "next": 6
+    "next": 6,
+    "year": 1941,
+    "place": "Ленинград",
+    "glossaryUnlock": [],
+    "sources": [
+      {
+        "title": "Википедия: Народное ополчение (СССР)",
+        "url": "https://ru.wikipedia.org/wiki/Народное_ополчение"
+      },
+      {
+        "title": "Википедия: Кисунько, Григорий Васильевич",
+        "url": "https://ru.wikipedia.org/wiki/Кисунько,_Григорий_Васильевич"
+      }
+    ]
   },
   {
     "id": 6,
@@ -145,7 +204,23 @@
     "buttonText": "И стал офицером?",
     "photo": "img/rus1_radar.jpg",
     "photoCaption": "РЛС РУС‑1 «Ревень» — пример техники ВНОС и ранней радиолокации",
-    "next": 7
+    "next": 7,
+    "year": 1942,
+    "place": "Училище ВНОС",
+    "glossaryUnlock": [
+      "vnos",
+      "rls"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: Радиолокация",
+        "url": "https://ru.wikipedia.org/wiki/Радиолокация"
+      },
+      {
+        "title": "Википедия: РУС-1",
+        "url": "https://ru.wikipedia.org/wiki/РУС-1"
+      }
+    ]
   },
   {
     "id": 7,
@@ -175,7 +250,22 @@
     "buttonText": "Что было дальше?",
     "photo": "img/leningrad_aa.jpg",
     "photoCaption": "«Зенитчики на страже Ленинградского неба», 1941",
-    "next": 8
+    "next": 8,
+    "year": 1942,
+    "place": "Москва (ПВО)",
+    "glossaryUnlock": [
+      "pvo"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: Противовоздушная оборона",
+        "url": "https://ru.wikipedia.org/wiki/Противовоздушная_оборона"
+      },
+      {
+        "title": "Википедия: Радиолокация",
+        "url": "https://ru.wikipedia.org/wiki/Радиолокация"
+      }
+    ]
   },
   {
     "id": 8,
@@ -205,7 +295,16 @@
     "buttonText": "Идём дальше",
     "photo": "img/budyonny_academy.jpg",
     "photoCaption": "Военная академия связи им. С. М. Будённого (Санкт‑Петербург)",
-    "next": 9
+    "next": 9,
+    "year": 1944,
+    "place": "Ленинград",
+    "glossaryUnlock": [],
+    "sources": [
+      {
+        "title": "Военная академия связи имени С. М. Будённого (справка)",
+        "url": "https://vasa.mil.ru/"
+      }
+    ]
   },
   {
     "id": 9,
@@ -231,7 +330,22 @@
     "buttonText": "Какие ракеты?",
     "photo": "img/almaz_hq.jpg",
     "photoCaption": "Штаб‑квартира НПО «Алмаз» / «Алмаз‑Антей» (Москва)",
-    "next": 10
+    "next": 10,
+    "year": 1950,
+    "place": "КБ‑1 (Подмосковье)",
+    "glossaryUnlock": [
+      "kb1"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: КБ-1 (СССР)",
+        "url": "https://ru.wikipedia.org/wiki/КБ-1"
+      },
+      {
+        "title": "Википедия: НПО «Алмаз»",
+        "url": "https://ru.wikipedia.org/wiki/НПО_Алмаз"
+      }
+    ]
   },
   {
     "id": 10,
@@ -269,6 +383,22 @@
         "text": "Перейти к созданию системы ‘А’",
         "next": 12
       }
+    ],
+    "year": 1955,
+    "place": "Москва (ПВО)",
+    "glossaryUnlock": [
+      "s25",
+      "s75"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: С-25",
+        "url": "https://ru.wikipedia.org/wiki/С-25"
+      },
+      {
+        "title": "Википедия: С-75",
+        "url": "https://ru.wikipedia.org/wiki/С-75"
+      }
     ]
   },
   {
@@ -295,7 +425,18 @@
     "buttonText": "Что дальше?",
     "photo": "img/hero_medal.png",
     "photoCaption": "Медаль «Серп и Молот» — Герой Социалистического Труда",
-    "next": 12
+    "next": 12,
+    "year": 1956,
+    "place": "СССР",
+    "glossaryUnlock": [
+      "hero"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: Герой Социалистического Труда",
+        "url": "https://ru.wikipedia.org/wiki/Герой_Социалистического_Труда"
+      }
+    ]
   },
   {
     "id": 12,
@@ -325,7 +466,23 @@
     "buttonText": "Дальше…",
     "photo": "img/system_A.jpg",
     "photoCaption": "Фото: Система ‘А’ — экспериментальный комплекс",
-    "next": 13
+    "next": 13,
+    "year": 1956,
+    "place": "СССР",
+    "glossaryUnlock": [
+      "pro",
+      "system_a"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: Система А",
+        "url": "https://ru.wikipedia.org/wiki/Система_А"
+      },
+      {
+        "title": "Википедия: Противоракетная оборона",
+        "url": "https://ru.wikipedia.org/wiki/Противоракетная_оборона"
+      }
+    ]
   },
   {
     "id": 13,
@@ -351,7 +508,23 @@
     "buttonText": "Финал?",
     "photo": "img/rocket_launch.jpg",
     "photoCaption": "Фото: Пуск ракеты на полигоне Сары‑Шаган",
-    "next": 14
+    "next": 14,
+    "year": 1961,
+    "place": "Сары‑Шаган",
+    "glossaryUnlock": [
+      "saryshagan",
+      "v1000"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: Сары-Шаган (полигон)",
+        "url": "https://ru.wikipedia.org/wiki/Сары-Шаган_(полигон)"
+      },
+      {
+        "title": "Википедия: В-1000",
+        "url": "https://ru.wikipedia.org/wiki/В-1000"
+      }
+    ]
   },
   {
     "id": 14,
@@ -377,6 +550,27 @@
     "buttonText": "Вернуться в меню",
     "photo": "img/don2n_radar.jpg",
     "photoCaption": "Радар Дон‑2Н — ключевой элемент современной системы ПРО Москвы",
-    "next": null
+    "next": null,
+    "year": 1972,
+    "place": "Москва (ПРО)",
+    "glossaryUnlock": [
+      "a35",
+      "a135",
+      "don2n"
+    ],
+    "sources": [
+      {
+        "title": "Википедия: А-35",
+        "url": "https://ru.wikipedia.org/wiki/А-35"
+      },
+      {
+        "title": "Википедия: А-135",
+        "url": "https://ru.wikipedia.org/wiki/А-135"
+      },
+      {
+        "title": "Википедия: Дон-2Н",
+        "url": "https://ru.wikipedia.org/wiki/Дон-2Н"
+      }
+    ]
   }
 ]

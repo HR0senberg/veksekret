@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проект 1430 - Г.В. Кисунько</title>
+        <meta name="theme-color" content="#0b0d19">
+    <meta name="description" content="Интерактивный проект о Г.В. Кисунько: квест, «Полигон испытаний» и галерея.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Проект 1430 - Г.В. Кисунько</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -77,6 +83,7 @@
 
                 <!-- Mobile bottom sheet: Towers / Fact tabs (no overlapping panels on phones) -->
                 <div class="defense-sheet" id="defenseSheet" aria-label="Панель управления полигоном">
+                    <div class="defense-sheet-handle" id="defenseSheetHandle" role="button" tabindex="0" aria-label="Изменить высоту панели"></div>
                     <div class="defense-sheet-tabs" role="tablist" aria-label="Панель: Башни и Факт">
                         <button class="defense-sheet-tab is-active" type="button" id="sheetTabTowers" role="tab"
                             aria-selected="true" aria-controls="sheetPanelTowers">Башни</button>
@@ -91,6 +98,7 @@
 
                         <div class="defense-sheet-panel" id="sheetPanelFact" role="tabpanel" aria-labelledby="sheetTabFact">
                             <div id="historicalFact" class="historical-fact hidden">
+                    <div class="wave-summary" id="waveSummary" aria-live="polite"></div>
                     <div class="fact-title" id="factTitle"></div>
                     <div class="fact-content">
                         <div class="fact-text fact-collapsed" id="factContent"></div>
@@ -115,6 +123,7 @@
 
     <!-- Sound Controls (collapsed by default; expands on click) -->
     <div class="sound-controls" id="soundControls">
+        <button class="install-btn hidden" id="installBtn" type="button" aria-label="Установить приложение" title="Установить">⬇️</button>
         <button class="help-btn" id="helpBtn" type="button" aria-label="Справка и управление">❔</button>
         <button class="sound-panel-toggle" id="soundPanelToggle" type="button" aria-label="Настройки звука">🔊</button>
         <div class="sound-panel-body" id="soundPanelBody" aria-hidden="true">
