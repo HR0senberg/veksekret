@@ -459,6 +459,15 @@ input:focus-visible,
   user-select: none;
 }
 
+.menu-consultant{
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.56);
+  letter-spacing: 0.4px;
+  line-height: 1.35;
+}
+
 
 /* Main App */
 #app {
@@ -630,8 +639,8 @@ input:focus-visible,
 
 .back-btn {
   position: fixed;
-  top: var(--space-24);
-  left: var(--space-24);
+  top: calc(var(--space-24) + var(--safe-top));
+  left: calc(var(--space-24) + var(--safe-left));
   padding: var(--space-16) var(--space-24);
   font-family: var(--font-family-base);
   background: var(--color-primary);
@@ -1522,8 +1531,8 @@ kbd{
 /* Sound Settings (compact + раскрывается по нажатию) */
 .sound-controls {
   position: fixed;
-  top: var(--space-16);
-  right: var(--space-16);
+  top: calc(var(--space-16) + var(--safe-top));
+  right: calc(var(--space-16) + var(--safe-right));
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -1538,33 +1547,46 @@ kbd{
   box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
+/* Icon buttons inside sound-controls should be perfectly centered and одинаковыми по размеру */
+.sound-controls > button{
+  display: grid;
+  place-items: center;
+  padding: 0;
+  line-height: 0;
+}
+
+.sound-controls > button .ui-icon{
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
 .sound-panel-toggle {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   border: 1px solid rgba(201, 176, 122, 0.35);
   background: rgba(12, 14, 24, 0.35);
   color: var(--color-white);
   cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
   font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 }
 
 
 .install-btn{
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   border: 1px solid rgba(201, 176, 122, 0.35);
   background: rgba(12, 14, 24, 0.35);
   color: var(--color-white);
   cursor: pointer;
   font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, opacity 160ms ease;
 }
 
@@ -1578,17 +1600,16 @@ kbd{
 }
 
 .help-btn{
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   border: 1px solid rgba(201, 176, 122, 0.35);
   background: rgba(12, 14, 24, 0.35);
   color: var(--color-white);
   cursor: pointer;
   font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
@@ -1599,6 +1620,11 @@ kbd{
 
 .help-btn:active{
   transform: translateY(1px) scale(0.99);
+}
+
+.sound-panel-toggle:hover{
+  background: rgba(12, 14, 24, 0.45);
+  border-color: rgba(201, 176, 122, 0.55);
 }
 
 .sound-panel-body {
@@ -1703,23 +1729,30 @@ kbd{
   border-color: rgba(201, 176, 122, 0.8) !important;
 }
 
-/* Bottom nav container: fixed overlay (does not reserve space) */
+/* Quest scene navigation (under the scene, NOT as a floating overlay)
+   - Horizontal layout (◀ / ▶)
+   - Stays inside #questContainer flow, so it never overlaps photos/text */
 #navButtons.nav-floating{
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: max(12px, env(safe-area-inset-bottom));
+  position: static;
+  left: auto;
+  bottom: auto;
+  transform: none;
+
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 6px 8px;
+  gap: 12px;
+
+  width: max-content;
+  margin: 14px auto 0;
+  padding: 10px 12px;
+
   background: rgba(12, 14, 24, 0.08);
   border: 1px solid rgba(201, 176, 122, 0.35);
   border-radius: 14px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  z-index: 999;
 }
 
 /* Glass icon buttons */
@@ -1753,7 +1786,7 @@ kbd{
 /* Even smaller on narrow screens */
 @media (max-width: 480px){
   .nav-icon-btn{ width: 40px; height: 40px; border-radius: 11px; font-size: 1rem; }
-  #navButtons.nav-floating{ gap: 8px; padding: 5px 6px; }
+  #navButtons.nav-floating{ gap: 7px; padding: 5px 6px; }
 }
 
 /* Tooltips only on desktop */
@@ -2087,7 +2120,8 @@ kbd{
             padding-bottom: 24px;
         }
         #questContainer.has-floating-nav{
-            padding-bottom: calc(88px + env(safe-area-inset-bottom));
+            /* Реальная высота плавающей навигации задаётся из JS в --floating-nav-h */
+            padding-bottom: calc(var(--floating-nav-h, 88px) + 24px + env(safe-area-inset-bottom));
         }
 
         /* Адаптивность для маленьких экранов */
@@ -3391,29 +3425,7 @@ kbd{
             line-height: 1.55;
         }
 
-        .quest-sources-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .quest-source {
-            display: block;
-            padding: 12px 12px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.10);
-            background: rgba(0,0,0,0.18);
-            color: rgba(255,255,255,0.90);
-            text-decoration: none;
-            transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
-        }
-
-        a.quest-source:hover {
-            transform: translateY(-1px);
-            border-color: rgba(183,244,255,0.22);
-            background: rgba(0,0,0,0.26);
-        }
-
+        
         .quest-empty {
             padding: 18px 16px;
             border-radius: 14px;
@@ -3670,7 +3682,8 @@ kbd{
         }
         /* Нижний отступ добавляем только когда есть плавающая навигация */
         #questContainer.has-floating-nav {
-            padding-bottom: calc(72px + env(safe-area-inset-bottom));
+            /* Реальная высота плавающей навигации задаётся из JS в --floating-nav-h */
+            padding-bottom: calc(var(--floating-nav-h, 72px) + 20px + env(safe-area-inset-bottom));
         }
 
 
@@ -3991,4 +4004,445 @@ kbd{
     opacity: 1 !important;
     transform: translateX(-50%) translateY(0) scale(1) !important;
   }
+}
+
+
+/* ============================================================
+   Pre-release: мобильное масштабирование + safe areas
+   - Исправляет 100vh на мобильных (dvh где доступно)
+   - Учитывает вырезы/скругления (safe-area-inset-*)
+   ============================================================ */
+
+:root{
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  --app-vh: 100vh;
+
+  /* «Запас» под фиксированные элементы (кнопка меню + блок звука / нижняя навигация) */
+  --ui-safe-top: calc(88px + var(--safe-top));
+  --ui-safe-bottom: calc(140px + var(--safe-bottom));
+}
+
+@supports (height: 100dvh){
+  :root{ --app-vh: 100dvh; }
+}
+
+#loadingScreen{ height: var(--app-vh); }
+#app{ min-height: var(--app-vh); }
+
+@media (min-width: 1024px){
+  #app.active{ height: var(--app-vh); }
+}
+
+#questContainer{
+  max-height: calc(var(--app-vh) - var(--ui-safe-top) - var(--ui-safe-bottom));
+}
+
+@media (max-width: 520px){
+  #app{ padding: 16px; }
+
+  .back-btn{
+    top: calc(var(--space-16) + var(--safe-top));
+    left: calc(var(--space-16) + var(--safe-left));
+    padding: 12px 16px;
+  }
+
+  .sound-controls{
+    padding: 6px;
+    gap: 6px;
+  }
+}
+
+
+/* ============================================================
+   Pre-release pre2: единый адаптив + микро-вау + симметрия кнопок
+   Цели:
+   - Кнопки "?" и "Звук" одинаковые (размер, отступы, выравнивание) во всех состояниях
+   - Никаких наездов/переполнений на 480/390/360px
+   - Лёгкие анимации появления и приятный "tap" отклик без лишней агрессии
+   ============================================================ */
+
+:root{
+  /* Базовые "fluid" величины для проекта */
+  --ui-pad: clamp(12px, 2.6vw, 24px);
+  --ui-gap: clamp(8px, 2.2vw, 16px);
+  --ui-radius: clamp(14px, 2.2vw, 20px);
+
+  /* Тап/микро-вау */
+  --tap-scale: 0.985;
+  --tap-shadow: 0 10px 28px rgba(0,0,0,0.32);
+  --hover-shadow: 0 16px 46px rgba(0,0,0,0.28);
+
+  /* Правый блок управления (help + sound) */
+  --ctl-btn: 44px;
+  --ctl-pad: 6px;
+  --ctl-gap: 8px;
+  --ctl-collapsed: calc(var(--ctl-btn) + var(--ctl-pad) * 2);
+}
+
+/* ---- Симметрия кнопок Help/Sound ---- */
+
+.sound-controls{
+  /* ВНИМАНИЕ: ниже намеренно используем !important,
+     чтобы перебить старые каскадные версии "sound-controls" из прежних стадий. */
+  top: calc(clamp(10px, 1.6vw, 18px) + var(--safe-top)) !important;
+  right: calc(clamp(10px, 1.6vw, 18px) + var(--safe-right)) !important;
+  width: var(--ctl-collapsed) !important;
+  padding: var(--ctl-pad) !important;
+  gap: var(--ctl-gap) !important;
+  border-radius: 16px !important;
+  align-items: stretch !important;
+  overflow: hidden !important;
+}
+
+.sound-controls.is-open{
+  width: clamp(190px, 22vw, 250px) !important;
+}
+
+/* Только иконки (установить/справка/звук) должны быть одинаковыми и квадратными */
+.sound-controls > button{
+  width: var(--ctl-btn) !important;
+  height: var(--ctl-btn) !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  align-self: flex-end !important;
+  line-height: 0 !important;
+}
+
+/* НЕ растягиваем sound-toggle (текстовую кнопку внутри панели) */
+.sound-controls .sound-panel-body{
+  width: 100% !important;
+}
+
+/* Важно: sound-panel-toggle не должен превращаться в "широкую" плашку при открытии */
+.sound-controls .sound-panel-toggle,
+.sound-controls.is-open .sound-panel-toggle{
+  width: var(--ctl-btn) !important;
+  height: var(--ctl-btn) !important;
+}
+
+/* SVG-иконки одинакового размера */
+.sound-controls > button .ui-icon{
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Состояние mute: показываем слэш и прячем "волны" */
+.sound-panel-toggle .mute-slash{ opacity: 0; }
+.sound-panel-toggle.is-muted .mute-slash{ opacity: 1; }
+.sound-panel-toggle.is-muted .wave{ opacity: 0; }
+
+/* ---- Микро-вау: тактильный отклик и мягкие подсветки ---- */
+
+.menu-btn,
+.choice-btn,
+.tower-card,
+.gallery-item,
+.defense-btn,
+.back-btn,
+.help-btn,
+.sound-panel-toggle,
+.install-btn,
+.defense-sheet-tab{
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    filter 160ms ease;
+}
+
+@media (hover: hover){
+  .tower-card:hover,
+  .gallery-item:hover{
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
+  }
+}
+
+/* "Haptic-like" на тач: чуть темнее/ярче + мини-сжатие */
+@media (hover: none){
+  .menu-btn:active,
+  .choice-btn:active,
+  .tower-card:active,
+  .gallery-item:active,
+  .defense-btn:active,
+  .back-btn:active,
+  .help-btn:active,
+  .sound-panel-toggle:active,
+  .install-btn:active,
+  .defense-sheet-tab:active{
+    transform: translateY(1px) scale(var(--tap-scale));
+    box-shadow: var(--tap-shadow);
+    filter: brightness(1.06);
+  }
+}
+
+/* Лёгкое появление карточек/режимов */
+@media (prefers-reduced-motion: no-preference){
+  @keyframes ui-fade-up{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  #questMode:not(.hidden) .quest-container,
+  #galleryMode:not(.hidden) .gallery-container,
+  #defenseMode:not(.hidden) .defense-container{
+    animation: ui-fade-up 220ms ease both;
+  }
+
+  /* В квесте новая сцена воспринимается как "карточка" */
+  #questMode:not(.hidden) .chapter{
+    animation: ui-fade-up 220ms ease both;
+  }
+}
+
+/* ---- Мобильный аудит: 480 / 390 / 360 ---- */
+
+@media (max-width: 480px){
+  #app{ padding: var(--ui-pad) !important; }
+
+  /* Меню: кнопки не должны выходить за экран */
+  .menu-buttons{
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+  .menu-btn{
+    width: min(92vw, 360px) !important;
+    min-width: 0 !important;
+    padding: 14px 18px !important;
+    letter-spacing: 1.2px !important;
+  }
+
+  /* Заголовок в заставке: без обрезания */
+  .title-typewriter,
+  #titleTypewriter{
+    letter-spacing: clamp(1.5px, 0.8vw, 3px) !important;
+    text-align: center;
+    padding-inline: 10px;
+  }
+
+  .menu-footer{
+    font-size: 12px !important;
+    opacity: 0.85;
+    text-align: center;
+    padding-inline: 14px;
+  }
+
+  .menu-consultant{
+    font-size: 11px !important;
+    margin-top: 6px;
+  }
+
+  /* Галерея: меньше отступов */
+  .gallery-container{
+    padding: var(--ui-pad) !important;
+    gap: 14px !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Полигон: статистику в 2 колонки, чтобы не выпирало */
+  #defenseMode .stats{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px !important;
+  }
+  #defenseMode .stat-item{ white-space: normal !important; }
+}
+
+@media (max-width: 390px){
+  :root{ --ctl-btn: 42px; --ctl-pad: 6px; --ctl-gap: 8px; }
+
+  .menu-btn{ padding: 13px 16px !important; }
+  .back-btn{
+    padding: 10px 14px !important;
+    border-radius: 12px !important;
+  }
+
+  #defenseMode .defense-controls .defense-btn{
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 360px){
+  :root{ --ctl-btn: 40px; }
+
+  .project-logo{ width: 92px !important; height: 92px !important; margin-bottom: 18px !important; }
+  .menu-btn{ width: min(94vw, 340px) !important; }
+  .sound-controls.is-open{ width: min(92vw, 240px) !important; }
+}
+
+
+/* ============================================================
+   RELEASE CANDIDATE RC1 — Design System Pass
+   Цели:
+   - единый язык панелей (фон/обводка/тени)
+   - единая система кнопок и состояний (hover/active/focus)
+   - таймлайн квеста удобнее на мобилке (snap + hit-area + fade edges)
+   - правый блок управления (help/sound) всегда симметричный, даже когда панель раскрыта
+   ============================================================ */
+
+:root{
+  /* Единые "стеклянные" панели */
+  --rc-panel-bg: rgba(18, 20, 28, 0.74);
+  --rc-panel-bg-strong: rgba(18, 20, 28, 0.86);
+  --rc-panel-stroke: rgba(201, 176, 122, 0.28);
+  --rc-panel-stroke-strong: rgba(201, 176, 122, 0.46);
+  --rc-panel-shadow: 0 18px 60px rgba(0,0,0,0.45);
+  --rc-panel-shadow-soft: 0 12px 36px rgba(0,0,0,0.35);
+
+  /* Текст */
+  --rc-text: rgba(255,255,255,0.92);
+  --rc-muted: rgba(255,255,255,0.72);
+
+  /* Кнопки */
+  --rc-btn-radius: 14px;
+  --rc-btn-stroke: rgba(201, 176, 122, 0.35);
+  --rc-btn-stroke-hover: rgba(201, 176, 122, 0.55);
+  --rc-btn-bg: rgba(12, 14, 24, 0.34);
+  --rc-btn-bg-hover: rgba(12, 14, 24, 0.46);
+}
+
+/* ---- Единый язык "панелей" ---- */
+:where(.quest-head, .chapter, .quest-overlay-dialog){
+  background: var(--rc-panel-bg) !important;
+  border: 1px solid var(--rc-panel-stroke) !important;
+  border-radius: var(--ui-radius) !important;
+  box-shadow: var(--rc-panel-shadow) !important;
+}
+
+:where(.quest-overlay-dialog){
+  background: var(--rc-panel-bg-strong) !important;
+}
+
+:where(.historical-fact, #towerPanel, .tower-panel){
+  border-radius: var(--ui-radius) !important;
+  border-color: var(--rc-panel-stroke) !important;
+}
+
+/* Галерея: карточки в одном стиле */
+.gallery-item{
+  border-radius: var(--ui-radius) !important;
+  border: 1px solid var(--rc-panel-stroke) !important;
+  background: rgba(18, 20, 28, 0.62) !important;
+  box-shadow: var(--rc-panel-shadow-soft);
+}
+
+/* ---- Единая система кнопок (мягкая унификация без ломания дизайна) ---- */
+:where(.quest-tool-btn, .nav-icon-btn, .sound-toggle, .defense-btn){
+  border-radius: var(--rc-btn-radius) !important;
+  border-color: var(--rc-btn-stroke) !important;
+}
+
+:where(.quest-tool-btn:hover, .nav-icon-btn:hover, .sound-toggle:hover, .defense-btn:hover){
+  border-color: var(--rc-btn-stroke-hover) !important;
+}
+
+:where(.quest-tool-btn:focus-visible, .nav-icon-btn:focus-visible, .sound-toggle:focus-visible, .defense-btn:focus-visible){
+  outline: 3px solid rgba(201, 176, 122, 0.32) !important;
+  outline-offset: 2px !important;
+}
+
+/* ---- Правый блок управления: help/sound всегда квадратные и симметричные ---- */
+/* В старых блоках были правила width:100% для .sound-panel-toggle на мобилках — перебиваем. */
+.sound-controls > button{
+  width: var(--ctl-btn) !important;
+  height: var(--ctl-btn) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+/* Открытие панели не должно растягивать иконки */
+.sound-controls.is-open .sound-panel-toggle,
+.sound-controls.is-open .help-btn,
+.sound-controls.is-open .install-btn{
+  width: var(--ctl-btn) !important;
+  height: var(--ctl-btn) !important;
+}
+
+/* Иконки одинакового масштаба */
+.sound-controls .ui-icon{
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Плашка управления чуть более "продуктовая" */
+.sound-controls{
+  border: 1px solid var(--rc-panel-stroke) !important;
+  background: rgba(18, 20, 28, 0.68) !important;
+  box-shadow: var(--rc-panel-shadow-soft) !important;
+}
+
+/* ---- Таймлайн квеста: удобнее на мобилке ---- */
+.quest-timeline{
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  /* лёгкий fade по краям, чтобы было понятно, что таймлайн скроллится */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 18px, #000 calc(100% - 18px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 18px, #000 calc(100% - 18px), transparent);
+}
+
+.timeline-node{
+  scroll-snap-align: center;
+  min-height: 44px;
+  padding: 6px 8px;
+}
+
+/* На очень узких экранах уменьшаем шум (год чуть компактнее) */
+@media (max-width: 390px){
+  .timeline-node{ min-width: 42px; padding: 6px 6px; }
+  .timeline-year{ font-size: 0.66rem; }
+}
+
+/* ---- Полигон: читаемость HUD ---- */
+#defenseMode .game-header .stats{
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(201, 176, 122, 0.22);
+  background: rgba(0,0,0,0.14);
+}
+
+#defenseMode .game-header .stat-item{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+#defenseMode .game-header .stat-value{
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Микро‑вау: карточки слегка "дышат" при тапе ---- */
+@media (hover: none) and (pointer: coarse){
+  .chapter:active,
+  .gallery-item:active,
+  .tower-card:active{
+    transform: translateY(1px) scale(var(--tap-scale));
+    filter: brightness(1.04);
+  }
+}
+
+
+/* RC1: при раскрытии панели звука иконки остаются у правого края,
+   а тело панели растягивается на ширину контейнера */
+.sound-controls{
+  align-items: flex-end !important;
+}
+.sound-panel-body{
+  align-self: stretch;
+  width: 100%;
+}
+.sound-panel-body .sound-toggle,
+.sound-panel-body .volume-control{
+  width: 100%;
 }

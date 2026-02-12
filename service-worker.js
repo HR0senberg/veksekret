@@ -4,7 +4,9 @@
  * - works on GitHub Pages (relative paths)
  */
 
-const VERSION = 'p1430-pwa-v5';
+// RELEASE CANDIDATE: bump cache version so updates are guaranteed to apply
+// RC hotfix: credits update (consultant mention)
+const VERSION = 'p1430-pwa-rc1.1';
 const STATIC_CACHE = `${VERSION}-static`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 

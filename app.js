@@ -325,7 +325,11 @@ function initSoundPanel() {
 function updateSoundPanelIcon() {
     const toggleBtn = document.getElementById('soundPanelToggle');
     if (!toggleBtn) return;
-    toggleBtn.textContent = SoundManager.enabled ? '🔊' : '🔇';
+    // Важно: не перетираем SVG-иконку текстом.
+    // Вместо этого переключаем класс — CSS сам покажет "слэш" для режима mute.
+    const muted = !SoundManager.enabled;
+    toggleBtn.classList.toggle('is-muted', muted);
+    toggleBtn.setAttribute('data-muted', muted ? 'true' : 'false');
 }
 
 function updateSoundToggleText() {
@@ -458,6 +462,7 @@ function ensureHelpOverlay(){
                     <ul>
                         <li><kbd>←</kbd> / <kbd>↑</kbd> — предыдущая сцена</li>
                         <li><kbd>→</kbd> / <kbd>↓</kbd> / <kbd>Enter</kbd> / <kbd>Space</kbd> — следующая</li>
+                        <li><kbd>G</kbd> — главы, <kbd>L</kbd> — справочник, <kbd>A</kbd> — коллекция</li>
                         <li>Прогресс сохраняется автоматически — в меню появится «Продолжить»</li>
                     </ul>
                 </div>
@@ -748,7 +753,7 @@ function initGlobalShortcuts(){
             }
         }
 
-        // 3.8) Квест: быстро открыть «Главы / Справочник / Источники»
+        // 3.8) Квест: быстро открыть «Главы / Справочник»
         if (gameState && gameState.mode === 'quest' && !isAnyOverlayOpen()) {
             const ae = document.activeElement;
             const typing = ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA');
@@ -761,11 +766,6 @@ function initGlobalShortcuts(){
                 if (isQuestGlossaryHotkey(e)) {
                     e.preventDefault();
                     toggleQuestGlossary();
-                    return;
-                }
-                if (isQuestSourcesHotkey(e)) {
-                    e.preventDefault();
-                    toggleQuestSources();
                     return;
                 }
             }
@@ -1263,8 +1263,7 @@ questScenes = [
         "title": "Г.В. Кисунько — «Секретная зона: Исповедь генерального конструктора» (мемуары)",
         "url": ""
       }
-    ]
-  },
+    ]},
   {
     "id": 2,
     "title": "СЦЕНА 2: РОЖДЕНИЕ И ПРОИСХОЖДЕНИЕ",
@@ -1329,8 +1328,7 @@ questScenes = [
         "title": "Википедия: Кисунько, Григорий Васильевич",
         "url": "https://ru.wikipedia.org/wiki/Кисунько,_Григорий_Васильевич"
       }
-    ]
-  },
+    ]},
   {
     "id": 4,
     "title": "СЦЕНА 4: АСПИРАНТУРА И ЗАЩИТА",
@@ -1368,8 +1366,7 @@ questScenes = [
         "title": "Википедия: Кисунько, Григорий Васильевич",
         "url": "https://ru.wikipedia.org/wiki/Кисунько,_Григорий_Васильевич"
       }
-    ]
-  },
+    ]},
   {
     "id": 5,
     "title": "СЦЕНА 5: ДОБРОВОЛЕЦ ОПОЛЧЕНИЯ",
@@ -1449,8 +1446,7 @@ questScenes = [
         "title": "Википедия: РУС-1",
         "url": "https://ru.wikipedia.org/wiki/РУС-1"
       }
-    ]
-  },
+    ]},
   {
     "id": 7,
     "title": "СЦЕНА 7: КОМАНДИР ВЗВОДА, 337-Й БАТАЛЬОН ПВО",
@@ -1494,8 +1490,7 @@ questScenes = [
         "title": "Википедия: Радиолокация",
         "url": "https://ru.wikipedia.org/wiki/Радиолокация"
       }
-    ]
-  },
+    ]},
   {
     "id": 8,
     "title": "СЦЕНА 8: ПРЕПОДАВАТЕЛЬ ВОЕННОЙ АКАДЕМИИ",
@@ -1533,8 +1528,7 @@ questScenes = [
         "title": "Военная академия связи имени С. М. Будённого (справка)",
         "url": "https://vasa.mil.ru/"
       }
-    ]
-  },
+    ]},
   {
     "id": 9,
     "title": "СЦЕНА 9: ПЕРЕХОД В КБ-1",
@@ -1574,8 +1568,7 @@ questScenes = [
         "title": "Википедия: НПО «Алмаз»",
         "url": "https://ru.wikipedia.org/wiki/НПО_Алмаз"
       }
-    ]
-  },
+    ]},
   {
     "id": 10,
     "title": "СЦЕНА 10: ЗЕНИТНЫЕ СИСТЕМЫ «С-25» и «С-75»",
@@ -1628,8 +1621,7 @@ questScenes = [
         "title": "Википедия: С-75",
         "url": "https://ru.wikipedia.org/wiki/С-75"
       }
-    ]
-  },
+    ]},
   {
     "id": 11,
     "title": "СЦЕНА 11: ГЕРОЙ СОЦИАЛИСТИЧЕСКОГО ТРУДА",
@@ -1665,8 +1657,7 @@ questScenes = [
         "title": "Википедия: Герой Социалистического Труда",
         "url": "https://ru.wikipedia.org/wiki/Герой_Социалистического_Труда"
       }
-    ]
-  },
+    ]},
   {
     "id": 12,
     "title": "СЦЕНА 12: СИСТЕМА ‘А’ — НОВОЕ ЗАДАНИЕ",
@@ -1711,8 +1702,7 @@ questScenes = [
         "title": "Википедия: Противоракетная оборона",
         "url": "https://ru.wikipedia.org/wiki/Противоракетная_оборона"
       }
-    ]
-  },
+    ]},
   {
     "id": 13,
     "title": "СЦЕНА 13: ПЕРВЫЙ ПЕРЕХВАТ",
@@ -1753,8 +1743,7 @@ questScenes = [
         "title": "Википедия: В-1000",
         "url": "https://ru.wikipedia.org/wiki/В-1000"
       }
-    ]
-  },
+    ]},
   {
     "id": 14,
     "title": "СЦЕНА 14: НАСЛЕДИЕ И ПАМЯТЬ",
@@ -1800,9 +1789,9 @@ questScenes = [
         "title": "Википедия: Дон-2Н",
         "url": "https://ru.wikipedia.org/wiki/Дон-2Н"
       }
-    ]
-  }
+    ]}
 ];
+
 
 
 
@@ -2481,7 +2470,6 @@ const GlossaryDB = (() => {
     return { all, get, setList, loadFromJson };
 })();
 
-
 // Game State
 let gameState = {
     mode: null,
@@ -2616,7 +2604,7 @@ const QuestState = (() => {
 
     const defaultState = () => ({
         visited: {},      // { [sceneId]: timestamp }
-        glossary: {}      // { [termId]: timestamp }
+        glossary: {},     // { [termId]: timestamp }
     });
 
     const load = () => {
@@ -2631,9 +2619,10 @@ const QuestState = (() => {
                 state = defaultState();
                 return state;
             }
+            
             state = {
                 visited: (data.visited && typeof data.visited === 'object') ? data.visited : {},
-                glossary: (data.glossary && typeof data.glossary === 'object') ? data.glossary : {}
+                glossary: (data.glossary && typeof data.glossary === 'object') ? data.glossary : {},
             };
             return state;
         } catch (_) {
@@ -2793,7 +2782,9 @@ function computeQuestScale(){
     const qm = document.getElementById('questMode');
     if (!qm) return 1;
     const w = qm.clientWidth || window.innerWidth;
-    const s = Math.max(0.85, Math.min(1.15, w / QUEST_REF_WIDTH));
+    // Мобильный аудит: на узких экранах (360–390px) допускаем чуть более компактную шкалу,
+    // чтобы карточки/фото/таймлайн не наезжали друг на друга.
+    const s = Math.max(0.78, Math.min(1.12, w / QUEST_REF_WIDTH));
     document.documentElement.style.setProperty('--qs', s.toFixed(3));
     return s;
 }
@@ -2817,17 +2808,15 @@ function unbindQuestScale(){
 }
 
 // =============================================
-// Quest extras (Stage‑Quest‑1)
+// Quest extras (Stage‑Quest‑2)
 // - Оглавление/карта глав
 // - Таймлайн
 // - Справочник (термины) с «разблокировкой»
-// - Источники сцены
 // - Лайтбокс фото сцены
 // =============================================
 
 let questTocOverlayEl = null;
 let questGlossaryOverlayEl = null;
-let questSourcesOverlayEl = null;
 let questOverlayLastFocus = null;
 
 function isQuestTocOpen(){
@@ -2838,18 +2827,14 @@ function isQuestGlossaryOpen(){
     return !!(questGlossaryOverlayEl && questGlossaryOverlayEl.classList.contains('is-open'));
 }
 
-function isQuestSourcesOpen(){
-    return !!(questSourcesOverlayEl && questSourcesOverlayEl.classList.contains('is-open'));
-}
 
 function isQuestOverlayOpen(){
-    return isQuestTocOpen() || isQuestGlossaryOpen() || isQuestSourcesOpen();
+    return isQuestTocOpen() || isQuestGlossaryOpen();
 }
 
 function closeQuestOverlays(force = false){
     closeQuestToc(force);
     closeQuestGlossary(force);
-    closeQuestSources(force);
 }
 
 function stripScenePrefix(title){
@@ -2867,10 +2852,6 @@ function isQuestGlossaryHotkey(e){
     return k === 'l' || k === 'L' || k === 'д' || k === 'Д';
 }
 
-function isQuestSourcesHotkey(e){
-    const k = e.key;
-    return k === 'i' || k === 'I' || k === 'ш' || k === 'Ш';
-}
 
 function toggleQuestToc(){
     if (isQuestTocOpen()) closeQuestToc();
@@ -2882,10 +2863,6 @@ function toggleQuestGlossary(){
     else openQuestGlossary();
 }
 
-function toggleQuestSources(){
-    if (isQuestSourcesOpen()) closeQuestSources();
-    else openQuestSources();
-}
 
 function ensureQuestTocOverlay(){
     if (questTocOverlayEl) return;
@@ -3097,95 +3074,6 @@ function closeQuestGlossary(force = false){
     }
 }
 
-function ensureQuestSourcesOverlay(){
-    if (questSourcesOverlayEl) return;
-
-    questSourcesOverlayEl = document.createElement('div');
-    questSourcesOverlayEl.id = 'questSourcesOverlay';
-    questSourcesOverlayEl.className = 'quest-overlay';
-    questSourcesOverlayEl.setAttribute('aria-hidden', 'true');
-
-    questSourcesOverlayEl.innerHTML = `
-        <div class="quest-overlay-backdrop" data-action="close"></div>
-        <div class="quest-overlay-dialog" role="dialog" aria-modal="true" aria-label="Источники">
-            <div class="quest-overlay-header">
-                <div>
-                    <div class="quest-overlay-title">Источники</div>
-                    <div class="quest-overlay-sub" id="questSourcesSub">Материалы к текущей сцене</div>
-                </div>
-                <button type="button" class="quest-overlay-close" data-action="close" aria-label="Закрыть">✕</button>
-            </div>
-            <div class="quest-overlay-body">
-                <div class="quest-sources-list" id="questSourcesList"></div>
-            </div>
-        </div>
-    `;
-
-    questSourcesOverlayEl.addEventListener('click', (e) => {
-        const action = e.target && e.target.dataset ? e.target.dataset.action : null;
-        if (action === 'close') {
-            e.preventDefault();
-            closeQuestSources();
-        }
-    });
-
-    document.body.appendChild(questSourcesOverlayEl);
-}
-
-function renderQuestSources(scene){
-    ensureQuestSourcesOverlay();
-    const listEl = document.getElementById('questSourcesList');
-    const subEl = document.getElementById('questSourcesSub');
-    if (!listEl) return;
-
-    const title = scene ? stripScenePrefix(scene.title) : '';
-    if (subEl) subEl.textContent = title ? `Сцена: ${title}` : 'Материалы к текущей сцене';
-
-    const src = (scene && Array.isArray(scene.sources)) ? scene.sources : [];
-    if (!src.length) {
-        listEl.innerHTML = `
-            <div class="quest-empty">
-                <div class="quest-empty-title">Источники не указаны</div>
-                <div class="quest-empty-sub">Можно добавить ссылки в поле <code>sources</code> в scenes.json.</div>
-            </div>
-        `;
-        return;
-    }
-
-    listEl.innerHTML = src.map((s) => {
-        const t = (s && s.title) ? String(s.title) : '';
-        const url = (s && s.url) ? String(s.url).trim() : '';
-        if (url) {
-            return `<a class="quest-source" href="${url}" target="_blank" rel="noopener noreferrer">🔗 ${t}</a>`;
-        }
-        return `<div class="quest-source">📌 ${t}</div>`;
-    }).join('');
-}
-
-function openQuestSources(){
-    ensureQuestSourcesOverlay();
-    const scene = questScenes[gameState.currentChapter];
-    renderQuestSources(scene);
-
-    questOverlayLastFocus = document.activeElement;
-    questSourcesOverlayEl.setAttribute('aria-hidden', 'false');
-    questSourcesOverlayEl.classList.add('is-open');
-    updateBodyScrollLock();
-
-    const closeBtn = questSourcesOverlayEl.querySelector('.quest-overlay-close');
-    if (closeBtn) closeBtn.focus();
-}
-
-function closeQuestSources(force = false){
-    if (!questSourcesOverlayEl) return;
-    questSourcesOverlayEl.setAttribute('aria-hidden', 'true');
-    questSourcesOverlayEl.classList.remove('is-open');
-    updateBodyScrollLock();
-
-    if (!force && questOverlayLastFocus && typeof questOverlayLastFocus.focus === 'function') {
-        try { questOverlayLastFocus.focus(); } catch (_) {}
-    }
-}
 
 function buildQuestTimelineHTML(){
     const total = questScenes.length || 1;
@@ -3336,15 +3224,20 @@ function startDefense() {
 function updateQuestFloatingNavPadding(){
     const qc = document.getElementById('questContainer');
     if (!qc) return;
-    // Если содержимое квеста скроллится, добавляем небольшой нижний отступ,
-    // чтобы последние строки не перекрывались плавающими кнопками.
-    const needsPadding = qc.scrollHeight > (qc.clientHeight + 6);
-    qc.classList.toggle('has-floating-nav', needsPadding);
+    // PRE-RELEASE: Навигация сцен теперь находится *под сценой* (в потоке),
+    // а не как фиксированный оверлей. Поэтому дополнительный нижний отступ
+    // больше не нужен (иначе появится лишняя "пустота").
+    qc.classList.remove('has-floating-nav');
+    qc.style.removeProperty('--floating-nav-h');
 }
 
 function addNavigationButtons() {
     const container = document.getElementById('questContainer');
     if (!container) return;
+
+    // Размещаем навигацию *под сценой* (внутри карточки сцены),
+    // чтобы она выглядела как часть интерфейса квеста и не перекрывала контент.
+    const host = container.querySelector('.chapter') || container;
 
     let navButtons = document.getElementById('navButtons');
 
@@ -3388,7 +3281,7 @@ function addNavigationButtons() {
 
         navButtons.appendChild(prevButton);
         navButtons.appendChild(nextButton);
-        container.appendChild(navButtons);
+        host.appendChild(navButtons);
     }
 
     updateNavigationButtons();
@@ -3598,12 +3491,7 @@ function showChapter(index) {
                     <button type="button" class="quest-tool-btn" onclick="openQuestGlossary()" aria-label="Открыть справочник (L)">
                         <span class="quest-tool-emoji">📘</span>
                         <span class="quest-tool-text">Справочник</span>
-                    </button>
-                    <button type="button" class="quest-tool-btn" onclick="openQuestSources()" aria-label="Открыть источники (I)">
-                        <span class="quest-tool-emoji">📚</span>
-                        <span class="quest-tool-text">Источники</span>
-                    </button>
-                </div>
+                    </button>                </div>
             </div>
             <div class="quest-timeline" role="navigation" aria-label="Таймлайн квеста">
                 ${timelineHTML}
@@ -4248,7 +4136,17 @@ function updateDefenseHUD(){
     if (healthEl) healthEl.textContent = String(gameState.health);
     if (resEl) resEl.textContent = String(gameState.resources);
     if (waveEl) waveEl.textContent = String(gameState.wave);
-    if (leftEl) leftEl.textContent = String(gameState.enemiesRemaining || 0);
+    if (leftEl) {
+        leftEl.textContent = String(gameState.enemiesRemaining || 0);
+        // Убираем «Осталось: 0» когда волна не активна — меньше визуального шума.
+        const leftItem = leftEl.closest('.stat-item');
+        if (leftItem) {
+            const waveActive = (gameState.spawnQueue && gameState.spawnQueue.length > 0) ||
+                             (gameState.enemies && gameState.enemies.length > 0) ||
+                             ((gameState.enemiesRemaining || 0) > 0);
+            leftItem.style.display = waveActive ? '' : 'none';
+        }
+    }
 
     updateDefenseControlButtons();
 }

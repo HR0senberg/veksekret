@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
         <meta name="theme-color" content="#0b0d19">
     <meta name="description" content="Интерактивный проект о Г.В. Кисунько: квест, «Полигон испытаний» и галерея.">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,7 +32,10 @@
             <button class="menu-btn" type="button" onclick="startDefense()">ПОЛИГОН ИСПЫТАНИЙ</button>
             <button class="menu-btn" type="button" onclick="startGallery()">ГАЛЕРЕЯ</button>
         </div>
-        <div class="menu-footer" id="menuFooter">Авторы: Марыкин Тимофей и Максим Трушин • Проект 1430</div>
+        <div class="menu-footer" id="menuFooter">
+            Авторы: Марыкин Тимофей и Максим Трушин • Проект 1430
+            <span class="menu-consultant">Консультант: Руководитель музея истории создания противоракетной обороны «Звезды в пустыне» ГБОУ г. Москвы «Школа № 1430», Давидович Анна Павловна.</span>
+        </div>
     </div>
 
     <!-- Main Application -->
@@ -124,8 +127,21 @@
     <!-- Sound Controls (collapsed by default; expands on click) -->
     <div class="sound-controls" id="soundControls">
         <button class="install-btn hidden" id="installBtn" type="button" aria-label="Установить приложение" title="Установить">⬇️</button>
-        <button class="help-btn" id="helpBtn" type="button" aria-label="Справка и управление">❔</button>
-        <button class="sound-panel-toggle" id="soundPanelToggle" type="button" aria-label="Настройки звука">🔊</button>
+        <button class="help-btn" id="helpBtn" type="button" aria-label="Справка и управление">
+                <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                    <path d="M9.5 9.5a2.5 2.5 0 1 1 4.5 1.5c-.6.6-1.5 1-2.2 1.5-.7.5-.8 1-.8 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <circle cx="12" cy="17.5" r="1" fill="currentColor"></circle>
+                </svg>
+            </button>
+        <button class="sound-panel-toggle" id="soundPanelToggle" type="button" aria-label="Настройки звука">
+                <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 10v4h4l5 4V6L8 10H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+                    <path class="wave" d="M16.5 9.5a4 4 0 0 1 0 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                    <path class="wave" d="M19 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                    <path class="mute-slash" d="M3.5 3.5L20.5 20.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+            </button>
         <div class="sound-panel-body" id="soundPanelBody" aria-hidden="true">
             <button class="sound-toggle" type="button" onclick="toggleSound()" id="soundBtn" aria-pressed="false">🔇 ЗВУК: ВЫКЛ</button>
             <div class="volume-control">
