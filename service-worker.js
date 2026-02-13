@@ -5,7 +5,7 @@
  */
 
 // RELEASE CANDIDATE: bump cache version so updates are guaranteed to apply
-// RC hotfix: credits update (consultant mention)
+// RC hotfix: credits update
 const VERSION = 'p1430-pwa-rc1.1';
 const STATIC_CACHE = `${VERSION}-static`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;

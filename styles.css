@@ -459,16 +459,6 @@ input:focus-visible,
   user-select: none;
 }
 
-.menu-consultant{
-  display: block;
-  margin-top: 6px;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.56);
-  letter-spacing: 0.4px;
-  line-height: 1.35;
-}
-
-
 /* Main App */
 #app {
   display: none;
@@ -4234,12 +4224,7 @@ kbd{
     padding-inline: 14px;
   }
 
-  .menu-consultant{
-    font-size: 11px !important;
-    margin-top: 6px;
-  }
-
-  /* Галерея: меньше отступов */
+    /* Галерея: меньше отступов */
   .gallery-container{
     padding: var(--ui-pad) !important;
     gap: 14px !important;
